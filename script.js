@@ -1,8 +1,10 @@
-const { Octokit } = require("@octokit/core");
-const OpenAI = require("openai");
-const fetch = require('node-fetch');
-
 async function main() {
+    // Dynamically import 'node-fetch'
+    const fetch = (await import('node-fetch')).default;
+
+    const { Octokit } = require("@octokit/core");
+    const OpenAI = require("openai");
+
     const githubToken = process.env.GITHUB_TOKEN;
     const openai = new OpenAI({
         apiKey: process.env.OPENAI_API_KEY,
@@ -16,6 +18,7 @@ async function main() {
         auth: githubToken,
         request: { fetch }
     });
+
 
     try {
         // Get issue information
