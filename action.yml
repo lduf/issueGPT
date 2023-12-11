@@ -10,5 +10,5 @@ inputs:
     required: false
     default: '1000'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: 'node16'
+  image: 'scripts/process-issue.js'
