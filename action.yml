@@ -10,5 +10,5 @@ inputs:
     required: false
     default: '1000'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'script.js'
