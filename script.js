@@ -12,7 +12,7 @@ async function main() {
     const aiModel = process.env.AI_MODEL || 'gpt-4-1106-preview';
     const maxTokens = parseInt(process.env.MAX_TOKENS || '1000');
     const githubRepo = process.env.GITHUB_REPOSITORY;
-    const issueNumber = parseInt(process.env.GITHUB_ISSUE_NUMBER);
+    const issueNumber = parseInt(process.env.github.event.issue.number);
 
     const octokit = new Octokit({
         auth: githubToken,
