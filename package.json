@@ -19,6 +19,7 @@
   "dependencies": {
     "@octokit/core": "^5.0.2",
     "axios": "^1.6.2",
+    "node-fetch": "^3.3.2",
     "openai": "^4.20.1"
   }
 }

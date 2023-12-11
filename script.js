@@ -1,5 +1,6 @@
 const { Octokit } = require("@octokit/core");
 const OpenAI = require("openai");
+const fetch = require('node-fetch');
 
 async function main() {
     const githubToken = process.env.GITHUB_TOKEN;
@@ -11,8 +12,10 @@ async function main() {
     const githubRepo = process.env.GITHUB_REPOSITORY;
     const issueNumber = parseInt(process.env.GITHUB_ISSUE_NUMBER);
 
-    // Initialize Octokit for GitHub API interactions
-    const octokit = new Octokit({ auth: githubToken });
+    const octokit = new Octokit({
+        auth: githubToken,
+        request: { fetch }
+    });
 
     try {
         // Get issue information
