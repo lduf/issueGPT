@@ -1,5 +1,5 @@
 const { Octokit } = require("@octokit/core");
-import OpenAI from 'openai';
+const OpenAI = require("openai");
 
 async function main() {
     const githubToken = process.env.GITHUB_TOKEN;
