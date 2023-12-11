@@ -32,12 +32,22 @@ In the `issue-processor.yml` file, you can specify:
 Example configuration:
 
 ```yaml
-- name: Process issue
-  uses: ./.github/workflows/issue-processor.yml
-  with:
-    ai_model: 'text-davinci-004'
-    max_tokens: '200'
-    ai_prompt: 'Custom prompt template here: {}'
+name: Test Issue Processor
+on:
+  issues:
+    types: [opened]
+jobs:
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Test Issue Processor
+        uses: lduf/issueGPT@main
+        with:
+          ai_model: 'gpt-4-1106-preview'
+          max_tokens: '1000'
+
 ```
 
 ## Usage
