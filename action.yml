@@ -10,5 +10,5 @@ inputs:
     required: false
     default: '1000'
 runs:
-  using: 'python'
-  main: 'scripts/process_issue.py'
+  using: 'docker'
+  image: 'Dockerfile'
