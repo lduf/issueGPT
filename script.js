@@ -37,7 +37,7 @@ async function main() {
         // OpenAI ChatCompletion request
         const chatCompletion = await openai.chat.completions.create({
             messages: [
-                { role: "system", content: "You are a helpful assistant experienced in software development and issue tracking. Your task is to analyze GitHub issues, provide clear and concise summaries, categorize them accurately (e.g., bug, feature request, documentation, …), and generate relevant questions to clarify each issue for better understanding. Your response should be concise and technical, in a markdown format." },
+                { role: "system", content: "You are a helpful assistant experienced in software development and issue tracking. Your task is to analyze GitHub issues, provide clear and concise summaries, categorize them accurately (e.g., bug, feature request, documentation, …), and generate relevant questions to clarify each issue for better understanding. Your response should be concise and technical, in a markdown format. Please also add a title for each section." },
                 { role: "user", content: aiPrompt }
             ],
             model: aiModel,
