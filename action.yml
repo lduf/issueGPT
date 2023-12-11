@@ -8,7 +8,7 @@ inputs:
   max_tokens:
     description: 'The maximum number of tokens for the AI response'
     required: false
-    default: '1000'
+    default: '500'
 runs:
   using: 'node20'
   main: 'script.js'

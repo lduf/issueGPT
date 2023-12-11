@@ -12,11 +12,11 @@ async function main() {
     const githubToken = process.env.GITHUB_TOKEN;
 
     const aiModel = process.env.AI_MODEL || 'gpt-4-1106-preview';
-    const maxTokens = parseInt(process.env.MAX_TOKENS || '1000');
+    const maxTokens = parseInt(process.env.MAX_TOKENS || '500');
     const githubRepo = process.env.GITHUB_REPOSITORY;
     let eventPayload = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'));
     const issueNumber = eventPayload.issue.number;
-    
+
     const octokit = new Octokit({
         auth: githubToken,
         request: { fetch }
@@ -30,14 +30,14 @@ async function main() {
         const originalIssueText = issue.body;
 
         // Construct the AI prompt
-        const aiPrompt = `Please rephrase the following issue to make it clearer and provide additional context where necessary:\n${originalIssueText}\n\n` +
+        const aiPrompt = `Please rephrase and summarize the following issue to make it clearer and provide additional context where necessary:\n${originalIssueText}\n\n` +
                          `Identify the type of this issue. Is it a documentation update, a bug report, a feature request, or something else?\n\n` +
                          `Tag the user @${userLogin} who created this issue and list a few questions that could help clarify the issue for better understanding and resolution.`;
 
         // OpenAI ChatCompletion request
         const chatCompletion = await openai.chat.completions.create({
             messages: [
-                { role: "system", content: "You are a helpful assistant experienced in software development and issue tracking. Your task is to analyze GitHub issues, provide clear and concise summaries, categorize them accurately (e.g., bug, feature request, documentation), and generate relevant questions to clarify each issue for better understanding." },
+                { role: "system", content: "You are a helpful assistant experienced in software development and issue tracking. Your task is to analyze GitHub issues, provide clear and concise summaries, categorize them accurately (e.g., bug, feature request, documentation, …), and generate relevant questions to clarify each issue for better understanding. Your response should be concise and technical, in a markdown format." },
                 { role: "user", content: aiPrompt }
             ],
             model: aiModel,
