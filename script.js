@@ -4,16 +4,19 @@ async function main() {
 
     const { Octokit } = require("@octokit/core");
     const OpenAI = require("openai");
+    const fs = require('fs');
 
-    const githubToken = process.env.GITHUB_TOKEN;
     const openai = new OpenAI({
         apiKey: process.env.OPENAI_API_KEY,
     });
+    const githubToken = process.env.GITHUB_TOKEN;
+
     const aiModel = process.env.AI_MODEL || 'gpt-4-1106-preview';
     const maxTokens = parseInt(process.env.MAX_TOKENS || '1000');
     const githubRepo = process.env.GITHUB_REPOSITORY;
-    const issueNumber = parseInt(process.env.github.event.issue.number);
-
+    let eventPayload = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'));
+    const issueNumber = eventPayload.issue.number;
+    
     const octokit = new Octokit({
         auth: githubToken,
         request: { fetch }
