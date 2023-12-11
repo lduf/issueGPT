@@ -9,7 +9,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Test Issue Processor
-        uses: ./action.yml
+        uses: ./
         with:
           ai_model: 'gpt-4-1106-preview'
           max_tokens: '1000'
